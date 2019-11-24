@@ -6,11 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class RootController {
+public class DashboardController {
 
 	//@RequestMapping(value="/", method=RequestMethod.GET)
 	@GetMapping("/")
 	public String rootView() {
 		return "index";
+	}
+	
+	@GetMapping("/dashboard")
+	public String dashboard() {
+		return "dashboard";
 	}
 }

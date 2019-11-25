@@ -2,6 +2,18 @@
 <html xmlns:th="http://thymeLeaf.org">
 	<head>
 		<title>Voting App Login</title>
+		<script
+			src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+			integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+			crossorigin="anonymous">
+		</script>
+		<script type="text/javascript">
+		  	$(function() {
+		  		$("#createAccount").click(function() {
+		  			window.location.href = "/register";
+		  		})
+		  	});
+		</script>
 	</head>
 	<body>
 		<form action="" method="post">
@@ -34,6 +46,7 @@
 		        </p>
 		        <div>
 		            <button type="submit" class="btn">Log in</button>
+		            <button type="button" class="btn" id="createAccount">Create Account</button>
 		        </div>
 		    </fieldset>
 		 </form>

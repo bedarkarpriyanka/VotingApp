@@ -8,7 +8,11 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<h1>Product</h1>
-	<div class="container"></div>
+	<div class="container" th:if="${product != null}">
+		<h1>Product</h1>
+		<div>Is the product published:</div>
+		<div th:text="${product.published}"></div>
+
+	</div>
 </body>
 </html>

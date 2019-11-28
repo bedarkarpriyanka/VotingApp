@@ -51,7 +51,6 @@ public class ProductController {
 	@PostMapping("/products/{productId}")
 	public String updateProduct(@PathVariable Integer productId, Product product) {
 		product = productRepository.save(product);
-		System.out.println(product.getPublished());
 		return "redirect:/products/";
 	}
 }

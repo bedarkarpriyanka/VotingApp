@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeLeaf.org">
 <head>
+<script th:replace="fragments/header :: master"></script>
 <title>Voting Products</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
 </head>
 <body>
 	<div class="container" th:if="${product != null}">
@@ -15,10 +12,11 @@
 			</div>
 			<div class="card-body">
 				<form action="" method="post">
-					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> 
-					<input type="hidden" th:field=${product.id}>
-					<input type="hidden" th:field=${product.user}>
-					
+					<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}"> <input type="hidden"
+						th:field=${product.id}> <input type="hidden"
+						th:field=${product.user}>
+
 					<div class="form-group row">
 						<label class="col-12 col-md-3 col-lg-2 col-form-label" for="Name">Name</label>
 						<div class="col-12 col-md-9 col-lg-10">
@@ -28,11 +26,14 @@
 					</div>
 
 					<div class="custom-control custom-switch">
-						<input type="checkbox" class="custom-control-input" th:field="${product.published}">
-						<label class="custom-control-label" for="published1">Is Published</label>
+						<input type="checkbox" class="custom-control-input"
+							th:field="${product.published}"> <label
+							class="custom-control-label" for="published1">Is
+							Published</label>
 					</div>
 
-					<button class="btn btn-primary btn-lg" type="submit">Save Product</button>
+					<button class="btn btn-primary btn-lg" type="submit">Save
+						Product</button>
 
 				</form>
 			</div>

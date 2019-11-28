@@ -1,6 +1,7 @@
 package com.voting.web;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,10 +25,14 @@ public class ProductController {
 	@Autowired
 	ProductRepository productRepository;
 	
-	@GetMapping("/products")
-	public String getProducts(ModelMap model) {
-		//model.put("product", new Product());
-		return "product";
+	@PostMapping("/products")
+	public String createProduct(@AuthenticationPrincipal User user) {
+		Product product = new Product();
+		product.setPublished(false);
+		product.setUser(user);
+		
+		product = productRepository.save(product);
+		return "redirect:/products/" + product.getId();
 	}
 	
 	@GetMapping("/products/{productId}")
@@ -43,14 +48,10 @@ public class ProductController {
 		return "product";
 	}
 	
-	@PostMapping("/products")
-	public String createProduct(@AuthenticationPrincipal User user) {
-		Product product = new Product();
-		product.setPublished(false);
-		product.setUser(user);
-		
+	@PostMapping("/products/{productId}")
+	public String updateProduct(@PathVariable Integer productId, Product product) {
 		product = productRepository.save(product);
-		
-		return "redirect:/products/" + product.getId();
+		System.out.println(product.getPublished());
+		return "redirect:/products/";
 	}
 }

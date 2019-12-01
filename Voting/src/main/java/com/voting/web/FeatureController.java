@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.voting.domain.Feature;
+import com.voting.domain.User;
 import com.voting.service.FeatureService;
 
 @Controller
@@ -27,8 +29,8 @@ public class FeatureController {
 	FeatureService featureService;
 
 	@PostMapping("")
-	public String createFeature(@PathVariable Integer productId) {
-		Feature savedFeature = featureService.createFeature(productId);
+	public String createFeature(@AuthenticationPrincipal User user, @PathVariable Integer productId) {
+		Feature savedFeature = featureService.createFeature(productId, user);
 		return "redirect:/products/" + productId + "/features/" + savedFeature.getId();
 	}
 
@@ -43,7 +45,8 @@ public class FeatureController {
 	}
 
 	@PostMapping("{featureId}")
-	public String updateFeature(@PathVariable Integer productId, @PathVariable Integer featureId, Feature feature) {
+	public String updateFeature(@AuthenticationPrincipal User user, @PathVariable Integer productId, @PathVariable Integer featureId, Feature feature) {
+		feature.setUser(user);
 		featureService.save(feature);
 		String encodedProductName;
 		try {

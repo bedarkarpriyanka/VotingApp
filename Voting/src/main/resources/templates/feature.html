@@ -37,11 +37,20 @@
 
 					<button class="btn btn-lg btn-primary" type="submit"
 						th:if="${user.id == feature.user.id}">Save</button>
-
 				</form>
 
 			</div>
 		</div>
-	</div>
+		<div class="card" style="margin-top: 1.5em;">
+			<div class="card-header">
+				<h2>Comments</h2>
+			</div>
+			<div class="card-body">
+				<div th:each="comment : ${comments}">
+				<span th:text="${comment.text}" ></span>
+				</div>
+			</div>
+			
+		</div>
 </body>
 </html>

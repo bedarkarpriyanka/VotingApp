@@ -1,10 +1,15 @@
 package com.voting.domain;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Feature {
@@ -14,6 +19,7 @@ public class Feature {
 	private String status;
 	private Product product;
 	private User user;
+	private Set<Comment> comments;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -56,5 +62,13 @@ public class Feature {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="primaryKey.feature")
+	public Set<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
 	}
 }
